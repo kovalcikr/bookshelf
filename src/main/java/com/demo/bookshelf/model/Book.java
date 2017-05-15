@@ -4,25 +4,25 @@ import java.util.List;
 
 public class Book {
 
-    private String name;
+    private String title;
     private String abstractText;
     private List<Author> authors;
 
     public Book() {
     }
 
-    public Book(String name, String abstractText, List<Author> authors) {
-        this.name = name;
+    public Book(String title, String abstractText, List<Author> authors) {
+        this.title = title;
         this.abstractText = abstractText;
         this.authors = authors;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAbstractText() {
