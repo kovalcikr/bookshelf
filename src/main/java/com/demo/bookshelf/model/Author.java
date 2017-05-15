@@ -1,20 +1,49 @@
 package com.demo.bookshelf.model;
 
-import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import java.util.Set;
+
+@Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "surname"})
+})
 public class Author {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private String surname;
-    private List<Book> books;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authors")
+    private Set<Book> books;
 
     public Author() {
     }
 
-    public Author(String name, String surname, List<Book> books) {
+    public Author(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Author(String name, String surname, Set<Book> books) {
         this.name = name;
         this.surname = surname;
         this.books = books;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -33,11 +62,11 @@ public class Author {
         this.surname = surname;
     }
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 }
