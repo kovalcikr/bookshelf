@@ -2,6 +2,7 @@ package com.demo.bookshelf.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -9,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(uniqueConstraints={
@@ -21,7 +24,8 @@ public class Author {
     private Long id;
     private String name;
     private String surname;
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authors")
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authors", fetch = FetchType.EAGER)
     private Set<Book> books;
 
     public Author() {
