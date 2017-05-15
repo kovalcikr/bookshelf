@@ -51,10 +51,12 @@ public class DaoTest {
 
     @Test
     public void testBookDao_findByTitle() {
-        Book book = bookDao.findByTitle("book1");
+        Iterator<Book> bookIterator = bookDao.findByTitle("book1").iterator();
+        Book book = bookIterator.next();
         assertEquals("book1", book.getTitle());
         assertEquals("abstract 1", book.getAbstractText());
         assertEquals(originalAuthors, book.getAuthors());
+        assertFalse(bookIterator.hasNext());
     }
 
     public void testAuthorDao() {
